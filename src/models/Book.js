@@ -2,6 +2,11 @@ const { DataTypes } = require('sequelize');
 const sequelize = require('../config/db');
 
 const Book = sequelize.define('Book', {
+  id: {
+    type: DataTypes.UUID,
+    defaultValue: DataTypes.UUIDV4,
+    primaryKey: true
+  },
   title: {
     type: DataTypes.STRING,
     allowNull: false
@@ -16,6 +21,9 @@ const Book = sequelize.define('Book', {
     type: DataTypes.UUID,
     allowNull: false
   }
+},{
+  tableName: 'Books',
+  timestamps: true
 });
 
 module.exports = Book;

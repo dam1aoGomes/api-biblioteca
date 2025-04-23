@@ -69,3 +69,16 @@ exports.deleteBook = async (req, res) => {
     res.status(500).json({ error: 'Erro ao deletar livro' });
   }
 };
+
+// Mostrar apenas livros disponiveis
+exports.getAvailableBooks = async (req, res) => {
+  try {
+    const books = await Book.findAll({
+      where: { available: true },
+      include: [{ model: Author, attributes: ['id', 'name'] }]
+    });
+    res.json(books);
+  } catch (error) {
+    res.status(500).json({ error: 'Erro ao buscar livros disponíveis' });
+  }
+};
